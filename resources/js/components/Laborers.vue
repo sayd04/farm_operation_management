@@ -15,19 +15,19 @@
             <tr>
               <th>Name</th>
               <th>Address</th>
-              <th class="text-right">Actions</th>
+              <th class="actions-header">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="laborer in laborers" :key="laborer.id">
               <td class="font-medium">{{ laborer.name }}</td>
               <td class="text-gray">{{ laborer.address }}</td>
-              <td class="actions text-right">
-                <button class="icon-btn edit-btn" @click="editLaborer(laborer)" title="Edit">
-                  <i class="fas fa-edit"></i>
+              <td class="actions">
+                <button class="icon-btn edit-btn" @click="editLaborer(laborer)">
+                  <i class="fas fa-edit"></i> Edit
                 </button>
-                <button class="icon-btn delete-btn" @click="deleteLaborer(laborer.id)" title="Delete">
-                  <i class="fas fa-trash"></i>
+                <button class="icon-btn delete-btn" @click="deleteLaborer(laborer.id)">
+                  <i class="fas fa-trash"></i> Delete
                 </button>
               </td>
             </tr>
@@ -57,17 +57,26 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body centered-form">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" v-model="currentLaborer.name" placeholder="Laborer's full name">
+            <input 
+              type="text" 
+              v-model="currentLaborer.name" 
+              placeholder="Laborer's full name"
+              class="centered-input"
+            >
           </div>
           <div class="form-group">
             <label>Address</label>
-            <textarea v-model="currentLaborer.address" placeholder="Complete address"></textarea>
+            <textarea 
+              v-model="currentLaborer.address" 
+              placeholder="Complete address"
+              class="centered-textarea"
+            ></textarea>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer centered-footer">
           <button class="btn secondary" @click="closeModal">Cancel</button>
           <button class="btn primary" @click="saveLaborer">
             {{ isEditing ? 'Update' : 'Save' }}
@@ -217,36 +226,52 @@ export default {
   color: #64748b;
 }
 
-.text-right {
-  text-align: right;
+/* Action Buttons */
+.actions-header {
+  width: 200px;
+  text-align: center;
 }
 
-/* Action Buttons */
 .actions {
   white-space: nowrap;
+  text-align: center;
+  padding: 12px 8px !important;
 }
 
 .icon-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
-  margin-left: 8px;
+  padding: 8px 12px;
+  margin: 0 4px;
   border-radius: 4px;
-  color: #64748b;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: all 0.2s;
 }
 
-.icon-btn:hover {
-  background-color: #f1f5f9;
+.icon-btn i {
+  font-size: 0.9rem;
+}
+
+.edit-btn {
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
 }
 
 .edit-btn:hover {
-  color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.delete-btn {
+  color: #ef4444;
+  border: 1px solid #ef4444;
 }
 
 .delete-btn:hover {
-  color: #ef4444;
+  background-color: #fef2f2;
 }
 
 /* Empty State */
@@ -362,51 +387,66 @@ export default {
   color: #64748b;
 }
 
-.modal-body {
-  padding: 20px;
+/* Centered Form Styles */
+.centered-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
 }
 
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #334155;
-}
-
-.form-group input,
-.form-group textarea {
+.centered-form .form-group {
   width: 100%;
-  padding: 10px 12px;
+  max-width: 400px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.centered-input {
+  text-align: center;
+  padding: 12px 15px;
+  width: 100%;
+  margin: 0 auto;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   font-size: 0.95rem;
   transition: border-color 0.2s;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.centered-input:focus {
   outline: none;
   border-color: #16a085;
   box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.1);
 }
 
-.form-group textarea {
+.centered-textarea {
+  text-align: center;
+  padding: 12px 15px;
+  width: 100%;
+  margin: 0 auto;
   min-height: 100px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
   resize: vertical;
 }
 
-.modal-footer {
+.centered-textarea:focus {
+  outline: none;
+  border-color: #16a085;
+  box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.1);
+}
+
+.centered-footer {
+  justify-content: center;
+  gap: 20px;
   padding: 16px 20px;
   border-top: 1px solid #f0f0f0;
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
 }
 
+/* Button Styles */
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -416,8 +456,8 @@ export default {
 }
 
 .btn.secondary {
-  background: #000000;
-  border: 1px solid #000000;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   color: #334155;
 }
 
@@ -443,13 +483,21 @@ export default {
     gap: 12px;
   }
 
-  .laborers-table th,
-  .laborers-table td {
-    padding: 12px 15px;
+  .actions-header {
+    width: auto;
   }
-
-  .modal {
-    max-width: 100%;
+  
+  .icon-btn {
+    padding: 6px 8px;
+    margin: 0 2px;
+  }
+  
+  .icon-btn span {
+    display: none;
+  }
+  
+  .icon-btn i {
+    margin-right: 0;
   }
 }
 
@@ -460,10 +508,15 @@ export default {
     font-size: 0.9rem;
   }
 
-  .modal-footer {
-    flex-direction: column;
+  .centered-form .form-group {
+    max-width: 100%;
   }
-
+  
+  .centered-footer {
+    flex-direction: row;
+    gap: 10px;
+  }
+  
   .btn {
     width: 100%;
   }
