@@ -11,7 +11,7 @@ const routes = [
   { path: '/inventory', name: 'inventory', component: () => import('./components/EmptySection.vue') },
   { path: '/expenses', name: 'expenses', component: () => import('./components/EmptySection.vue') },
   { path: '/orders', name: 'orders', component: () => import('./components/EmptySection.vue') },
-  { path: '/laborers', name: 'laborers', component: () => import('./components/EmptySection.vue') },
+  { path: '/laborers', name: 'laborers', component: () => import('./components/Laborers.vue') },
   { path: '/weather-forecast', name: 'weather-forecast', component: () => import('./components/WeatherForecast.vue')},
 ]
 
